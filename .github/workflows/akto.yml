@@ -2,6 +2,7 @@ name: API Security- Akto
 
 on:
   push:
+  workflow_dispatch:
 
 jobs:
   akto:
