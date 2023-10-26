@@ -1,0 +1,25 @@
+name: Semgrep
+on:
+  workflow_dispatch: {}
+  pull_request: {}
+  push:
+    branches:
+      - master
+      
+    paths:
+      - .github/workflows/semgrep.yml
+
+jobs:
+  semgrep:    
+    name: semgrep/ci
+    runs-on: ubuntu-latest     
+    container:
+      image: returntocorp/semgrep:1.45.0 
+    if: (github.actor != 'dependabot[bot]')
+    steps:
+      - uses: actions/checkout@v3
+      - run: semgrep ci  --max-target-bytes 10000 --time --debug --exclude='*/test/*' --exclude='Testutils/*' --exclude='*.webp' --exclude='*.png' --exclude='*.svg' --exclude='*.woff' --exclude='*.woff2' --exclude='*.jpg' --exclude='*.glb' --exclude='*.pdf' --exclude='*.lock' --exclude='*.md' --exclude='*.xml' --exclude='*.pro' --exclude='.github/*'
+        env:
+           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+           #SEMGREP_RULES: p/mobsfscan
+        continue-on-error: true
