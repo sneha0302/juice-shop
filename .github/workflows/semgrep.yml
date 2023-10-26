@@ -18,7 +18,7 @@ jobs:
     if: (github.actor != 'dependabot[bot]')
     steps:
       - uses: actions/checkout@v3
-      - run: semgrep ci  --max-target-bytes 10000 --time --debug --exclude='*/test/*' --exclude='Testutils/*' --exclude='*.webp' --exclude='*.png' --exclude='*.svg' --exclude='*.woff' --exclude='*.woff2' --exclude='*.jpg' --exclude='*.glb' --exclude='*.pdf' --exclude='*.lock' --exclude='*.md' --exclude='*.xml' --exclude='*.pro' --exclude='.github/*'
+      - run: semgrep ci  --max-target-bytes 10000 --time --exclude='*/test/*' --exclude='Testutils/*' --exclude='*.webp' --exclude='*.png' --exclude='*.svg' --exclude='*.woff' --exclude='*.woff2' --exclude='*.jpg' --exclude='*.glb' --exclude='*.pdf' --exclude='*.lock' --exclude='*.md' --exclude='*.xml' --exclude='*.pro' --exclude='.github/*'
         env:
            SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
            #SEMGREP_RULES: p/mobsfscan
